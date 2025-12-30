@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: layout(~{::content})}">
+
+<body>
+    <div th:fragment="content">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Bienvenue sur Gestion Scolaire</h1>
+                <p class="col-md-8 fs-4">Cette application permet de gérer les inscriptions des élèves, les filières,
+                    les cours et les dossiers administratifs.</p>
+                <hr class="my-4">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a class="btn btn-primary btn-lg px-4 me-md-2" href="/eleves">Gérer les Élèves</a>
+                    <a class="btn btn-outline-secondary btn-lg px-4" href="/filieres">Voir les Filières</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Statistiques Rapides</h2>
+                    <p>Accédez rapidement à la liste complète des cours et gérez les affectations.</p>
+                    <a class="btn btn-outline-light" href="/cours">Gérer les Cours</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Ajouter un Élève</h2>
+                    <p>Inscrivez rapidement un nouvel élève et générez son dossier administratif automatiquement.</p>
+                    <a class="btn btn-outline-primary" href="/eleves/nouveau">Inscrire un Élève</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

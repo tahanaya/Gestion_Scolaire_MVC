@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: layout(~{::content})}">
+
+<body>
+    <div th:fragment="content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Liste des Élèves</h2>
+            <a href="/eleves/nouveau" class="btn btn-primary">Nouvel Élève</a>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Filière</th>
+                    <th>N° Dossier</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="eleve : ${eleves}">
+                    <td th:text="${eleve.nom}"></td>
+                    <td th:text="${eleve.prenom}"></td>
+                    <td th:text="${eleve.filiere.code}"></td>
+                    <td th:text="${eleve.dossierAdministratif.numeroInscription}"></td>
+                    <td>
+                        <a th:href="@{/eleves/details/{id}(id=${eleve.id})}"
+                            class="btn btn-sm btn-info text-white">Détails</a>
+                        <a th:href="@{/eleves/modifier/{id}(id=${eleve.id})}" class="btn btn-sm btn-warning">Éditer</a>
+                        <a th:href="@{/eleves/supprimer/{id}(id=${eleve.id})}" class="btn btn-sm btn-danger"
+                            onclick="return confirm('Êtes-vous sûr ?')">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

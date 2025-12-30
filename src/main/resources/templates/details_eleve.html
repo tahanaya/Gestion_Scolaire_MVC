@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{_layout :: layout(~{::content})}">
+
+<body>
+    <div th:fragment="content">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3>Détails de l'Élève</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="card-title" th:text="${eleve.nom} + ' ' + ${eleve.prenom}"></h5>
+                        <p class="card-text"><strong>Filière :</strong> <span th:text="${eleve.filiere.nom}"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-info" th:if="${eleve.dossierAdministratif != null}">
+                            <h5>Dossier Administratif</h5>
+                            <p><strong>N° Inscription :</strong> <span
+                                    th:text="${eleve.dossierAdministratif.numeroInscription}"></span></p>
+                            <p><strong>Date Création :</strong> <span
+                                    th:text="${eleve.dossierAdministratif.dateCreation}"></span></p>
+                        </div>
+                        <div class="alert alert-warning" th:unless="${eleve.dossierAdministratif != null}">
+                            <h5>Dossier Administratif</h5>
+                            <p>Aucun dossier trouvé pour cet élève.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="/eleves" class="btn btn-secondary mt-3">Retour</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Cours Suivis</h4>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center"
+                        th:each="c : ${eleve.cours}">
+                        <span th:text="${c.intitule} + ' (' + ${c.code} + ')'"></span>
+                        <a th:href="@{/eleves/{eid}/cours/supprimer/{cid}(eid=${eleve.id}, cid=${c.id})}"
+                            class="btn btn-sm btn-danger">Retirer</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4>Ajouter un Cours (Filière)</h4>
+                <div class="list-group">
+                    <div th:each="c : ${allCours}" th:unless="${eleve.cours.contains(c)}"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        <span th:text="${c.intitule}"></span>
+                        <a th:href="@{/eleves/{eid}/cours/ajouter(eid=${eleve.id}, coursId=${c.id})}"
+                            class="btn btn-sm btn-success">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
